@@ -36,6 +36,13 @@ class _HomePageState extends State<HomePage>
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (BuildContext context, Widget? child) {
+          final weatherStatus =
+              viewModel.weekDayList[_tabController.index].status;
+          final backgroundColor =
+              HSLColor.fromColor(weatherStatus.getWeatherColor())
+                  .withSaturation(0.8)
+                  .toColor();
+
           return Stack(
             children: [
               TabBarView(
@@ -43,6 +50,15 @@ class _HomePageState extends State<HomePage>
                   children: viewModel.weekDayList
                       .map((day) => WeatherDayPage(dayForecast: day))
                       .toList()),
+              Align(
+                alignment: Alignment.topCenter,
+                child: SafeArea(
+                  child: HeaderWidget(
+                    statusColor: backgroundColor,
+                    cityName: "City Name Here",
+                  ),
+                ),
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(

@@ -16,7 +16,7 @@ dependencies:
   shared_preferences: ^2.0.13
   font_awesome_flutter: ^10.1.0
   dio: ^5.1.2
-  flutter_svg: ^1.0.3
+  flutter_svg: ^2.0.7
   oktoast: ^3.2.0
   flutter_modular: ^5.0.3
   url_launcher: ^6.1.10
