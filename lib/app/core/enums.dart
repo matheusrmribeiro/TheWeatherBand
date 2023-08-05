@@ -7,3 +7,11 @@ enum WeekDay {
   Saturday,
   Sunday
 }
+
+enum WeatherStatus {
+  Sunny,
+  PartiallyCloudy,
+  Cloudy,
+  Stormy,
+  Snowing
+}

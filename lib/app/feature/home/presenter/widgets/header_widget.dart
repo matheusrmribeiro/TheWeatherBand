@@ -3,13 +3,13 @@ import 'package:intl/intl.dart';
 import 'package:weather_band/app/core/theme/app_colors.dart';
 
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({Key? key, required this.selectedWeekDayPosition}) : super(key: key);
+  const HeaderWidget({Key? key, required this.dateTime, required this.cityName}) : super(key: key);
 
-  final int selectedWeekDayPosition;
+  final DateTime dateTime;
+  final String cityName;
 
-  String getWeekDayName(int position) {
-    final day = DateTime.now().add(Duration(days: position));
-    final name = DateFormat("EEEE dd").format(day);
+  String getWeekDayName() {
+    final name = DateFormat("EEEE dd").format(dateTime);
     return name;
   }
 
@@ -19,7 +19,7 @@ class HeaderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          getWeekDayName(selectedWeekDayPosition),
+          getWeekDayName(),
           style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w500,
