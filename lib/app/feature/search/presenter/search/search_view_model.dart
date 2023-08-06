@@ -2,16 +2,16 @@ import 'package:weather_band/app/core/api/response_wrapper.dart';
 import 'package:weather_band/app/core/base/base_view_model.dart';
 import 'package:weather_band/app/core/base/enum/view_model_state.dart';
 import 'package:weather_band/app/core/languages/language_utils.dart';
-import 'package:weather_band/app/feature/search/data/repository/geolocation_repository_impl.dart';
+import 'package:weather_band/app/feature/search/data/repository/search_repository_impl.dart';
 
-import '../domain/entities/geolocation_entity.dart';
+import '../../domain/entities/city_entity.dart';
 
 class SearchViewModel extends BaseViewModel {
-  final GeolocationRepositoryImpl repository = GeolocationRepositoryImpl();
+  final SearchRepositoryImpl repository = SearchRepositoryImpl();
 
-  List<GeolocationEntity> searchResults = [];
+  List<CityEntity> searchResults = [];
 
-  void fetchData(String search) {
+  void fetchFromServer(String search) {
     blockLoading(
       message: LanguageUtils.getString("loading_geolocation"),
       block: () async {

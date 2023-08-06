@@ -1,5 +1,5 @@
-class GeolocationEntity {
-  GeolocationEntity({
+class CityEntity {
+  CityEntity({
     required this.name,
     required this.country,
     required this.state,
@@ -13,8 +13,8 @@ class GeolocationEntity {
   final double lat;
   final double lon;
 
-  static GeolocationEntity fromMap(Map<String, dynamic> map) =>
-      GeolocationEntity(
+  static CityEntity fromMap(Map<String, dynamic> map) =>
+      CityEntity(
         name: map["name"],
         country: map["country"],
         state: map["state"],
@@ -22,6 +22,15 @@ class GeolocationEntity {
         lon: map["lon"],
       );
 
-  static List<GeolocationEntity> fromMapList(List<Map<String, dynamic>> map) =>
+  static List<CityEntity> fromMapList(List<Map<String, dynamic>> map) =>
       map.map((e) => fromMap(e)).toList();
+
+  Map<String, dynamic> toMap() =>
+      {
+        "name": name,
+        "country": country,
+        "state": state,
+        "lat": lat,
+        "lon": lon,
+      };
 }
