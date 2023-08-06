@@ -17,16 +17,22 @@ class BookmarkViewModel extends BaseViewModel {
       block: () async {
         final response = await repository.getBookmarks();
 
-        if (response is SuccessWrapper)
+        if (response is SuccessWrapper) {
           bookmarks = response.data;
-        else
+          setState(IdleState());
+        } else
           setState(
             ErrorState(message: LanguageUtils.getString("error_geolocation")),
           );
-
-        setState(IdleState());
-      },
+        },
     );
+  }
+
+  void removeBookmark(CityEntity city) {
+    repository.removeBookmark(city);
+    final newBookmarks = List<CityEntity>.from(bookmarks)..remove(city);
+    bookmarks = newBookmarks;
+    notifyListeners();
   }
 
 }

@@ -6,6 +6,7 @@ Map<String, dynamic> english = {
     "error_weather": "We got a problem while fetching the weather data.",
     "error_geolocation": "We got a problem while fetching.",
     "empty_data": "Oops, there are nothing here.",
+    "select_city": "Choose a city...",
     "loading_weather": "Wait... I'll check the weather outside, just a second.",
     "loading_geolocation": "Searching...",
     "reload": "Refresh",

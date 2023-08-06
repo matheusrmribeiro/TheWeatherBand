@@ -16,7 +16,6 @@ class BaseViewModel extends ChangeNotifier {
   Future<void> blockLoading({required Function block, String? message}) async {
     setState(LoadingState(message: message));
     await block();
-    setState(IdleState());
   }
 
 }

@@ -28,7 +28,9 @@ class HeaderWidget extends StatelessWidget {
           useSafeArea: false,
           builder: (_) {
             return Dialog.fullscreen(
-              child: SearchPage(onItemSelected: (value) {}),
+              child: SearchPage(onItemSelected: (value) {
+                viewModel.setSelectedCity(value);
+              }),
             );
           },
         );

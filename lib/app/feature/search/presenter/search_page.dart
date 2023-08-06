@@ -16,41 +16,56 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        backgroundColor: AppColors.sunnyColor,
-        appBar: AppBar(
-          title: Text(LanguageUtils.getString("search")),
-          leading: IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          bottom: TabBar(
-            tabs: [
-              Tab(
-                text: LanguageUtils.getString("search_tab_bookmark"),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            backgroundColor: AppColors.sunnyColor,
+            appBar: AppBar(
+              title: Text(LanguageUtils.getString("search")),
+              leading: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-              Tab(
-                text: LanguageUtils.getString("search_tab_search"),
-              )
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            BookmarkedWidget(
-              onItemSelected: widget.onItemSelected,
+              bottom: TabBar(
+                controller: DefaultTabController.of(context)..addListener(() {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                }),
+                physics: NeverScrollableScrollPhysics(),
+                tabs: [
+                  Tab(
+                    text: LanguageUtils.getString("search_tab_bookmark"),
+                  ),
+                  Tab(
+                    text: LanguageUtils.getString("search_tab_search"),
+                  )
+                ],
+              ),
             ),
-            SearchWidget(
-              onItemSelected: widget.onItemSelected,
-            )
-          ],
-        ),
+            body: TabBarView(
+              children: [
+                BookmarkedWidget(
+                  onItemSelected: (value) {
+                    widget.onItemSelected(value);
+                    Navigator.pop(context);
+                  },
+                ),
+                SearchWidget(
+                  onItemSelected: (value) {
+                    widget.onItemSelected(value);
+                    Navigator.pop(context);
+                  },
+                )
+              ],
+            ),
+          );
+        }
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:weather_band/app/core/languages/language_utils.dart';
 import 'package:weather_band/app/feature/home/data/model/request/geo_point_request.dart';
 import 'package:weather_band/app/feature/home/data/repository/weather_repository_impl.dart';
 import 'package:weather_band/app/feature/home/domain/entities/day_forecast_entity.dart';
+import 'package:weather_band/app/feature/search/domain/entities/city_entity.dart';
 
 class HomeViewModel extends BaseViewModel {
   final WeatherRepositoryImpl repository = WeatherRepositoryImpl();
@@ -21,6 +22,7 @@ class HomeViewModel extends BaseViewModel {
   late WeekDay selectedWeekDay;
   List<DayForecastEntity> weekDayList = [];
   int position = 0;
+  CityEntity? selectedCity;
 
   void setWeekDay(WeekDay value, int position) {
     selectedWeekDay = value;
@@ -28,40 +30,53 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void setSelectedCity(CityEntity city) {
+    selectedCity = city;
+    fetchData();
+    notifyListeners();
+  }
+
   void fetchData() {
     blockLoading(
         message: LanguageUtils.getString("loading_weather"),
         block: () async {
-          final location = GeoPointRequest(
-            lat: -22.275406919110882,
-            lon: -48.52181823008409,
-          );
+          if (selectedCity != null) {
+            final location = GeoPointRequest(
+              lat: selectedCity!.lat,
+              lon: selectedCity!.lon,
+            );
 
-          bool hasError = false;
+            bool hasError = false;
 
-          final responses = await Future.wait(<Future>[
-            repository.getWeather(location),
-            repository.getForecast(location)
-          ], eagerError: true, cleanUp: (value) {
-            hasError = true;
-          });
-
-          for (final response in responses) {
-            if (response is SuccessWrapper) {
-              if (response.data is List)
-                weekDayList.addAll(response.data);
-              else
-                weekDayList.add(response.data);
-            } else
+            final responses = await Future.wait(<Future>[
+              repository.getWeather(location),
+              repository.getForecast(location)
+            ], eagerError: true, cleanUp: (value) {
               hasError = true;
-          }
+            });
 
-          if (hasError)
-            setState(ErrorState(message: LanguageUtils.getString("error_weather")));
-          else {
-            weekDayList.sort((a, b) => a.date.compareTo(b.date));
+             weekDayList.clear();
+            for (final response in responses) {
+              if (response is SuccessWrapper) {
+                if (response.data is List)
+                  weekDayList.addAll(response.data);
+                else
+                  weekDayList.add(response.data);
+              } else {
+                hasError = true;
+                break;
+              }
+            }
+
+            if (hasError)
+              setState(ErrorState(
+                  message: LanguageUtils.getString("error_weather")));
+            else {
+              weekDayList.sort((a, b) => a.date.compareTo(b.date));
+              setState(IdleState());
+            }
+          } else
             setState(IdleState());
-          }
         });
   }
 }

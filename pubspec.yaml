@@ -20,6 +20,7 @@ dependencies:
   oktoast: ^3.2.0
   flutter_modular: ^5.0.3
   url_launcher: ^6.1.10
+  connectivity_plus: ^4.0.2
 
 dev_dependencies:
   flutter_test:

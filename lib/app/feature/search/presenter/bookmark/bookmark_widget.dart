@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_band/app/core/base/enum/view_model_state.dart';
 import 'package:weather_band/app/core/languages/language_utils.dart';
+import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
 import 'package:weather_band/app/core/widgets/custom_empty_widget.dart';
 import 'package:weather_band/app/core/widgets/custom_loading_widget.dart';
@@ -62,6 +63,12 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget> {
                               onTap: () {
                                 this.widget.onItemSelected(item);
                               },
+                              trailing: IconButton(
+                                onPressed: () {
+                                  viewModel.removeBookmark(item);
+                                },
+                                icon: Icon(Icons.delete, color: AppColors.white),
+                              ),
                             );
                           });
                     }

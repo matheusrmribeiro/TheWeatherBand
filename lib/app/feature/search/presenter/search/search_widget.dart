@@ -92,6 +92,12 @@ class _SearchWidgetState extends State<SearchWidget> {
                               onTap: () {
                                 this.widget.onItemSelected(item);
                               },
+                              trailing: IconButton(
+                                onPressed: () {
+                                  viewModel.addBookmark(item);
+                                },
+                                icon: Icon(Icons.bookmarks, color: AppColors.white,),
+                              ),
                             );
                           });
                     }

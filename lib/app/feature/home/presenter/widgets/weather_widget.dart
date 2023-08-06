@@ -16,12 +16,6 @@ class WeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weatherStatus = weekDayList[tabController.index].status;
-    final backgroundColor =
-    HSLColor.fromColor(weatherStatus.getWeatherColor())
-        .withSaturation(0.8)
-        .toColor();
-
     return Stack(
       children: [
         TabBarView(
@@ -30,15 +24,6 @@ class WeatherWidget extends StatelessWidget {
             children: weekDayList
                 .map((day) => WeatherDayPage(dayForecast: day))
                 .toList()),
-        Align(
-          alignment: Alignment.topCenter,
-          child: SafeArea(
-            child: HeaderWidget(
-              statusColor: backgroundColor,
-              cityName: "City Name Here",
-            ),
-          ),
-        ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(

@@ -19,28 +19,20 @@ class ForecastSelectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 30,
-          child: TabBar(
-            indicatorColor: Colors.transparent,
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.w600,
-            ),
-            unselectedLabelStyle: TextStyle(
-                fontWeight: FontWeight.normal,
-            ),
-            controller: tabController,
-            tabs: daysForecast
-                .map((day) => Tab(
-                      text: getWeekDayName(day.date).toUpperCase(),
-                    ))
-                .toList()
-          ),
+    return TabBar(
+        indicatorColor: Colors.transparent,
+        labelStyle: TextStyle(
+          fontWeight: FontWeight.w600,
         ),
-      ],
+        unselectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.normal,
+        ),
+        controller: tabController,
+        tabs: daysForecast
+            .map((day) => Tab(
+          text: getWeekDayName(day.date).toUpperCase(),
+        ))
+            .toList()
     );
   }
 }

@@ -17,15 +17,19 @@ class SearchViewModel extends BaseViewModel {
       block: () async {
         final response = await repository.search(search);
 
-        if (response is SuccessWrapper)
+        if (response is SuccessWrapper) {
           searchResults = response.data;
-        else
+          setState(IdleState());
+        } else
           setState(
             ErrorState(message: LanguageUtils.getString("error_geolocation")),
           );
-
-        setState(IdleState());
       },
     );
   }
+
+  void addBookmark(CityEntity city) {
+    repository.addBookmark(city);
+  }
+
 }
