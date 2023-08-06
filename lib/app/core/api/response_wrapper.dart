@@ -1,15 +1,13 @@
-abstract class ResponseWrapper {}
+sealed class ResponseWrapper {}
 
-class EmptyWrapper extends ResponseWrapper { }
-
-class SuccessWrapper extends ResponseWrapper {
+class SuccessWrapper implements ResponseWrapper {
   SuccessWrapper({required this.data});
 
   final dynamic data;
 
 }
 
-class ErrorWrapper extends ResponseWrapper {
+class ErrorWrapper implements ResponseWrapper {
   ErrorWrapper({required this.errorResponse});
 
   final ResponseError errorResponse;

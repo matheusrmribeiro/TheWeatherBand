@@ -41,6 +41,8 @@ class AppColors {
   static const sunnyColor = Color(0xFFFDB88F);
   static const partiallyCloudyColor = Color(0xFFA9C77C);
   static const cloudyColor = Color(0xFF7CBAC7);
-  static const stormyColor = Color(0xFF7C96C7);
-  static const snowingColor = Color(0xFFE0D9D9);
+  static const rainyColor = Color(0xFFC57CC7);
+  static const stormyColor = Color(0xFF7C7DC7);
+  static const snowingColor = Color(0xFFC7A27C);
+  static const mistyColor = Color(0xFFE3D9D9);
 }

@@ -8,6 +8,15 @@ class DayForecastEntity {
   });
 
   final DateTime date;
-  final int temperature;
+  final double temperature;
   final WeatherStatus status;
+
+  static DayForecastEntity fromMap(Map<String, dynamic> map) => DayForecastEntity(
+        date: DateTime.fromMicrosecondsSinceEpoch(map["dt"], isUtc: true),
+        temperature: map["main"]["temp"],
+        status: WeatherStatus.getByString(map["weather"][0]["main"]),
+      );
+
+  static List<DayForecastEntity> fromMapList(List<Map<String, dynamic>> map) =>
+      map.map((e) => fromMap(e)).toList();
 }

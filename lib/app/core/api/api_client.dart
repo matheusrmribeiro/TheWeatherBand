@@ -18,10 +18,6 @@ class APIClient {
       "Accept": "application/json",
       "Content-Type": "application/json",
     };
-    String? token = getToken();
-    if (token != null) {
-      headers.addAll({"Authorization": "Bearer $token"});
-    }
 
     var options = BaseOptions(
       baseUrl: kSERVER_BASE,
@@ -29,16 +25,9 @@ class APIClient {
       receiveTimeout: Duration(milliseconds: 3000),
       headers: headers,
     );
+
     Dio dio = Dio(options);
     return dio;
-  }
-
-  String? getToken() {
-    if (prefs.containsKey("user")) {
-      Map<String, dynamic> map = json.decode(prefs.getString("user") ?? "{}");
-      return map["token"];
-    } else
-      return null;
   }
 
   Future<ResponseWrapper> request({
@@ -47,6 +36,8 @@ class APIClient {
     Map<String, dynamic> data = const {},
     Map<String, dynamic> query = const {},
   }) async {
+    query["appid"] = kAPI_KEY;
+    query["units"] = kUNITS_MEASUREMENT;
     try {
       Response<dynamic> response;
       switch (type) {

@@ -9,15 +9,30 @@ enum WeekDay {
   Thursday,
   Friday,
   Saturday,
-  Sunday
+  Sunday,
 }
 
 enum WeatherStatus {
   Sunny,
   PartiallyCloudy,
   Cloudy,
+  Rainy,
   Stormy,
-  Snowing;
+  Snowing,
+  Mist;
+
+  static WeatherStatus getByString(String value) {
+    switch (value) {
+      case "clear sky" || "few clouds": return Sunny;
+      case "scattered clouds": return PartiallyCloudy;
+      case "broken clouds": return Cloudy;
+      case "rain" || "shower rain": return Rainy;
+      case "thunderstorm": return Stormy;
+      case "snow": return Snowing;
+      case "mist": return Mist;
+      default: return Sunny;
+    }
+  }
 
   Color getWeatherColor() {
     switch (this) {
@@ -27,10 +42,14 @@ enum WeatherStatus {
         return AppColors.partiallyCloudyColor;
       case WeatherStatus.Cloudy:
         return AppColors.cloudyColor;
-      case WeatherStatus.Stormy:
+      case WeatherStatus.Rainy:
+        return AppColors.rainyColor;
+        case WeatherStatus.Stormy:
         return AppColors.stormyColor;
       case WeatherStatus.Snowing:
         return AppColors.snowingColor;
+      case WeatherStatus.Mist:
+        return AppColors.mistyColor;
     }
   }
 
@@ -42,10 +61,14 @@ enum WeatherStatus {
         return "assets/images/partially_cloudy.svg";
       case WeatherStatus.Cloudy:
         return "assets/images/cloudy.svg";
-      case WeatherStatus.Stormy:
+      case WeatherStatus.Rainy:
+        return "assets/images/rainy.svg";
+        case WeatherStatus.Stormy:
         return "assets/images/stormy.svg";
       case WeatherStatus.Snowing:
         return "assets/images/snowing.svg";
+      case WeatherStatus.Mist:
+        return "assets/images/misty.svg";
     }
   }
 
