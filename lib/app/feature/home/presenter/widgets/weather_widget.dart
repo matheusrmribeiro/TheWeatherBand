@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_band/app/feature/home/domain/day_forecast_entity.dart';
+import 'package:weather_band/app/feature/home/domain/entities/day_forecast_entity.dart';
 import 'package:weather_band/app/feature/home/presenter/weather_day_page.dart';
 import 'package:weather_band/app/feature/home/presenter/widgets/forecast_selector_widget.dart';
 import 'package:weather_band/app/feature/home/presenter/widgets/header_widget.dart';

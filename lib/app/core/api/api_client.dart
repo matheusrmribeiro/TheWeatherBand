@@ -11,16 +11,21 @@ import '../constants.dart';
 enum RequestType { get, put, post, delete, patch }
 
 class APIClient {
-  final SharedPreferences prefs = Modular.get<SharedPreferences>();
+  APIClient({String? baseUrl}) {
+    _dio = _buildDio(baseUrl);
+  }
 
-  Dio _buildDio() {
+  final SharedPreferences prefs = Modular.get<SharedPreferences>();
+  late Dio _dio;
+
+  Dio _buildDio(String? baseUrl) {
     final headers = {
       "Accept": "application/json",
       "Content-Type": "application/json",
     };
 
     var options = BaseOptions(
-      baseUrl: kSERVER_BASE,
+      baseUrl: baseUrl ?? kSERVER_BASE,
       connectTimeout: Duration(milliseconds: 5000),
       receiveTimeout: Duration(milliseconds: 3000),
       headers: headers,
@@ -37,28 +42,25 @@ class APIClient {
     Map<String, dynamic> query = const {},
   }) async {
     query["appid"] = kAPI_KEY;
-    query["units"] = kUNITS_MEASUREMENT;
     try {
       Response<dynamic> response;
       switch (type) {
         case RequestType.get:
-          response = await _buildDio().get(path, queryParameters: query);
+          response = await _dio.get(path, queryParameters: query);
           break;
         case RequestType.put:
-          response =
-              await _buildDio().put(path, data: data, queryParameters: query);
+          response = await _dio.put(path, data: data, queryParameters: query);
           break;
         case RequestType.post:
-          response =
-              await _buildDio().post(path, data: data, queryParameters: query);
+          response = await _dio.post(path, data: data, queryParameters: query);
           break;
         case RequestType.delete:
-          response = await _buildDio()
-              .delete(path, data: data, queryParameters: query);
+          response =
+              await _dio.delete(path, data: data, queryParameters: query);
           break;
         case RequestType.patch:
           response =
-              await _buildDio().patch(path, data: data, queryParameters: query);
+              await _dio.patch(path, data: data, queryParameters: query);
           break;
       }
 
@@ -72,7 +74,7 @@ class APIClient {
           response.statusCode.toString(),
         );
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       _printErrorLog(e);
       return _buildErrorWrapper(
         e.response,

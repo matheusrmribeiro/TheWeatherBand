@@ -5,7 +5,7 @@ import 'package:weather_band/app/core/enums.dart';
 import 'package:weather_band/app/core/languages/language_utils.dart';
 import 'package:weather_band/app/feature/home/data/model/request/geo_point_request.dart';
 import 'package:weather_band/app/feature/home/data/repository/weather_repository_impl.dart';
-import 'package:weather_band/app/feature/home/domain/day_forecast_entity.dart';
+import 'package:weather_band/app/feature/home/domain/entities/day_forecast_entity.dart';
 
 class HomeViewModel extends BaseViewModel {
   final WeatherRepositoryImpl repository = WeatherRepositoryImpl();

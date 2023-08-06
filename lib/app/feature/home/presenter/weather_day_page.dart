@@ -5,7 +5,7 @@ import 'package:weather_band/app/core/enums.dart';
 import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:weather_band/app/core/utils/extensions/enum_extension.dart';
 import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
-import 'package:weather_band/app/feature/home/domain/day_forecast_entity.dart';
+import 'package:weather_band/app/feature/home/domain/entities/day_forecast_entity.dart';
 
 import 'widgets/header_widget.dart';
 
