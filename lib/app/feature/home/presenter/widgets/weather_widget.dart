@@ -26,6 +26,7 @@ class WeatherWidget extends StatelessWidget {
       children: [
         TabBarView(
             controller: tabController,
+            physics: AlwaysScrollableScrollPhysics(),
             children: weekDayList
                 .map((day) => WeatherDayPage(dayForecast: day))
                 .toList()),

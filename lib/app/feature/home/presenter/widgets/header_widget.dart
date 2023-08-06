@@ -21,6 +21,7 @@ class HeaderWidget extends StatelessWidget {
 
     return SizedBox(
       width: double.infinity,
+      height: 70,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

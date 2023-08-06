@@ -4,7 +4,10 @@ import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
 
 class CustomErrorWidget extends StatelessWidget {
-  const CustomErrorWidget({Key? key}) : super(key: key);
+  const CustomErrorWidget({Key? key, required this.onRefresh})
+      : super(key: key);
+
+  final VoidCallback onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,10 @@ class CustomErrorWidget extends StatelessWidget {
               ),
             ),
           ),
+          TextButton(
+            onPressed: onRefresh,
+            child: Text(LanguageUtils.getString("reload")),
+          )
         ],
       ),
     );

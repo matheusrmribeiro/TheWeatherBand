@@ -1,9 +1,8 @@
 import 'package:weather_band/app/core/api/response_wrapper.dart';
 import 'package:weather_band/app/core/base/base_view_model.dart';
-import 'package:weather_band/app/core/constants.dart';
+import 'package:weather_band/app/core/base/enum/view_model_state_enum.dart';
 import 'package:weather_band/app/core/enums.dart';
 import 'package:weather_band/app/core/languages/language_utils.dart';
-import 'package:weather_band/app/core/widgets/toast.dart';
 import 'package:weather_band/app/feature/home/data/model/request/geo_point_request.dart';
 import 'package:weather_band/app/feature/home/data/repository/weather_repository_impl.dart';
 import 'package:weather_band/app/feature/home/domain/day_forecast_entity.dart';
@@ -20,7 +19,6 @@ class HomeViewModel extends BaseViewModel {
 
   late WeekDay currentWeekDay;
   late WeekDay selectedWeekDay;
-  bool hasError = false;
   List<DayForecastEntity> weekDayList = [];
   int position = 0;
 
@@ -39,6 +37,8 @@ class HomeViewModel extends BaseViewModel {
             lon: -48.52181823008409,
           );
 
+          bool hasError = false;
+
           final responses = await Future.wait(<Future>[
             repository.getWeather(location),
             repository.getForecast(location)
@@ -56,7 +56,12 @@ class HomeViewModel extends BaseViewModel {
               hasError = true;
           }
 
-          weekDayList.sort((a, b) => a.date.compareTo(b.date));
+          if (hasError)
+            setState(ViewModelStateEnum.Error);
+          else {
+            weekDayList.sort((a, b) => a.date.compareTo(b.date));
+            setState(ViewModelStateEnum.Idle);
+          }
         });
   }
 }

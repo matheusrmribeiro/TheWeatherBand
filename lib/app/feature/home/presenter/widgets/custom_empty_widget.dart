@@ -4,7 +4,9 @@ import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
 
 class CustomEmptyWidget extends StatelessWidget {
-  const CustomEmptyWidget({Key? key}) : super(key: key);
+  const CustomEmptyWidget({Key? key, required this.onRefresh}) : super(key: key);
+
+  final VoidCallback onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,10 @@ class CustomEmptyWidget extends StatelessWidget {
               ),
             ),
           ),
+          TextButton(
+            onPressed: onRefresh,
+            child: Text(LanguageUtils.getString("reload")),
+          )
         ],
       ),
     );

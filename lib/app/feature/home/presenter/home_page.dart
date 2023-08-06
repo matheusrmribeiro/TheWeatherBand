@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:weather_band/app/core/base/enum/view_model_state_enum.dart';
 import 'package:weather_band/app/core/constants.dart';
 import 'package:weather_band/app/core/enums.dart';
 import 'package:weather_band/app/core/theme/app_colors.dart';
@@ -24,9 +25,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+
   final viewModel = Modular.get<HomeViewModel>();
 
   late TabController _tabController;
+
+  void onRefresh() {
+    viewModel.fetchData();
+  }
 
   @override
   void initState() {
@@ -41,19 +47,27 @@ class _HomePageState extends State<HomePage>
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (BuildContext context, Widget? child) {
-          if (viewModel.isLoading)
-            return CustomLoadingWidget(message: viewModel.loadingMessage);
-          if (viewModel.hasError) {
-            return CustomErrorWidget();
+          Widget widget;
+          switch (viewModel.state) {
+            case ViewModelStateEnum.Idle: {
+              if (viewModel.weekDayList.isEmpty) {
+                widget = CustomEmptyWidget(onRefresh: onRefresh);
+              } else {
+                widget = WeatherWidget(
+                  tabController: _tabController,
+                  weekDayList: viewModel.weekDayList,
+                );
+              }
+            }
+            case ViewModelStateEnum.Loading: {
+              widget = CustomLoadingWidget(message: viewModel.loadingMessage);
+            }
+            case ViewModelStateEnum.Error: {
+              widget = CustomErrorWidget(onRefresh: onRefresh);
+            }
           }
-          if (viewModel.weekDayList.isEmpty) {
-            return CustomEmptyWidget();
-          } else {
-            return WeatherWidget(
-              tabController: _tabController,
-              weekDayList: viewModel.weekDayList,
-            );
-          }
+
+          return widget;
         },
       ),
     );

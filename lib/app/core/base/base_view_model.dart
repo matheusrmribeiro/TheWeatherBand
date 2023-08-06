@@ -1,5 +1,5 @@
 import 'package:weather_band/app/core/api/api_client.dart';
-import 'package:weather_band/app/core/base/enum/custom_form_state.dart';
+import 'package:weather_band/app/core/base/enum/view_model_state_enum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -8,51 +8,20 @@ class BaseViewModel extends ChangeNotifier {
   bool isLoading = false;
   String loadingMessage = "";
 
-  /// The current register status
-  CustomFormState state = CustomFormState.NONE;
-
-  /// Returns if the register is in the edit state.
-  get isEditState => state == CustomFormState.EDIT;
-
-  /// Returns if the register is in the select state.
-  get isSelectedState => state == CustomFormState.SELECTED;
-
-  void setIDLEState() {
-    if (state == CustomFormState.IDLE)
-      state = CustomFormState.NONE;
-    state = CustomFormState.IDLE;
-    notifyListeners();
-  }
-
-  void setEditState() {
-    if (state == CustomFormState.EDIT)
-      state = CustomFormState.NONE;
-    state = CustomFormState.EDIT;
-    notifyListeners();
-  }
-
-  void setSelectedState() {
-    if (state == CustomFormState.SELECTED)
-      state = CustomFormState.NONE;
-    state = CustomFormState.SELECTED;
-    notifyListeners();
-  }
+  ViewModelStateEnum state = ViewModelStateEnum.Idle;
 
   void notifyChanges() => notifyListeners();
 
-  void setLoadingStatus(bool isLoading, {String? message}) {
-    this.isLoading = isLoading;
-    if (!isLoading || message == null)
-      loadingMessage = "";
-    else
-      loadingMessage = message;
+  void setState(ViewModelStateEnum value, {String? message}) {
+    loadingMessage = message ?? "";
+    state = value;
     notifyListeners();
   }
 
   Future<void> blockLoading({required Function block, String? message}) async {
-    setLoadingStatus(true, message: message);
+    setState(ViewModelStateEnum.Loading, message: message);
     await block();
-    setLoadingStatus(false);
+    setState(ViewModelStateEnum.Idle);
   }
 
 }
