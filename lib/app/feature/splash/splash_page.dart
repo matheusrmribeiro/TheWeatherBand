@@ -1,10 +1,9 @@
-import 'package:weather_band/app/core/languages/language_utils.dart';
-import 'package:weather_band/app/core/routes.dart';
-import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
+import 'package:weather_band/app/core/languages/language_utils.dart';
+import 'package:weather_band/app/core/routes.dart';
+import 'package:weather_band/app/core/theme/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

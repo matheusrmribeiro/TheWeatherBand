@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_band/app/core/enums.dart';
-import 'package:weather_band/app/core/theme/app_colors.dart';
-import 'package:weather_band/app/core/utils/extensions/enum_extension.dart';
 import 'package:weather_band/app/feature/home/domain/entities/day_forecast_entity.dart';
 
 class ForecastSelectorWidget extends StatelessWidget {

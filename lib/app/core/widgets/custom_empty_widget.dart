@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_band/app/core/languages/language_utils.dart';
 import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
 
-class CustomLoadingWidget extends StatelessWidget {
-  const CustomLoadingWidget({Key? key, required this.message})
-      : super(key: key);
+class CustomEmptyWidget extends StatelessWidget {
+  const CustomEmptyWidget({
+    Key? key,
+    required this.onRefresh,
+    required this.message,
+  }) : super(key: key);
 
+  final VoidCallback onRefresh;
   final String message;
 
   @override
@@ -19,11 +22,11 @@ class CustomLoadingWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset("assets/images/loading_weather.svg",
-              height: 100,
-              width: 100,
-              alignment: Alignment.center,
-              semanticsLabel: "loading"),
+          Icon(
+            Icons.list_alt,
+            size: 50,
+            color: AppColors.white,
+          ),
           CustomDividerWidget(height: 15),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
@@ -36,6 +39,10 @@ class CustomLoadingWidget extends StatelessWidget {
               ),
             ),
           ),
+          TextButton(
+            onPressed: onRefresh,
+            child: Text(LanguageUtils.getString("reload")),
+          )
         ],
       ),
     );

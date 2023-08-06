@@ -1,6 +1,6 @@
 import 'package:weather_band/app/core/api/response_wrapper.dart';
 import 'package:weather_band/app/core/base/base_view_model.dart';
-import 'package:weather_band/app/core/base/enum/view_model_state_enum.dart';
+import 'package:weather_band/app/core/base/enum/view_model_state.dart';
 import 'package:weather_band/app/core/enums.dart';
 import 'package:weather_band/app/core/languages/language_utils.dart';
 import 'package:weather_band/app/feature/home/data/model/request/geo_point_request.dart';
@@ -30,7 +30,7 @@ class HomeViewModel extends BaseViewModel {
 
   void fetchData() {
     blockLoading(
-        message: LanguageUtils.getString("loading"),
+        message: LanguageUtils.getString("loading_weather"),
         block: () async {
           final location = GeoPointRequest(
             lat: -22.275406919110882,
@@ -57,10 +57,10 @@ class HomeViewModel extends BaseViewModel {
           }
 
           if (hasError)
-            setState(ViewModelStateEnum.Error);
+            setState(ErrorState(message: LanguageUtils.getString("error_weather")));
           else {
             weekDayList.sort((a, b) => a.date.compareTo(b.date));
-            setState(ViewModelStateEnum.Idle);
+            setState(IdleState());
           }
         });
   }

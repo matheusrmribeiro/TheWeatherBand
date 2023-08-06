@@ -1,15 +1,13 @@
 class GeolocationEntity {
   GeolocationEntity({
-    required this.nameEn,
-    required this.nameBr,
+    required this.name,
     required this.country,
     required this.state,
     required this.lat,
     required this.lon,
   });
 
-  final String nameEn;
-  final String nameBr;
+  final String name;
   final String country;
   final String? state;
   final double lat;
@@ -17,8 +15,7 @@ class GeolocationEntity {
 
   static GeolocationEntity fromMap(Map<String, dynamic> map) =>
       GeolocationEntity(
-        nameEn: map["local_names"]["pt"],
-        nameBr: map["local_names"]["en"],
+        name: map["name"],
         country: map["country"],
         state: map["state"],
         lat: map["lat"],

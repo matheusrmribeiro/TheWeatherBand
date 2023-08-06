@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:weather_band/app/core/languages/language_utils.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
 
-class CustomErrorWidget extends StatelessWidget {
-  const CustomErrorWidget({Key? key, required this.onRefresh})
+class CustomLoadingWidget extends StatelessWidget {
+  const CustomLoadingWidget({Key? key, required this.message})
       : super(key: key);
 
-  final VoidCallback onRefresh;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.redLight,
+      color: AppColors.sunnyColor,
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
-            Icons.error_outline,
-            size: 50,
-            color: AppColors.white,
-          ),
+          SvgPicture.asset("assets/images/loading_weather.svg",
+              height: 100,
+              width: 100,
+              alignment: Alignment.center,
+              semanticsLabel: "loading"),
           CustomDividerWidget(height: 15),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              LanguageUtils.getString("error"),
+              message,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.white,
@@ -35,10 +35,6 @@ class CustomErrorWidget extends StatelessWidget {
               ),
             ),
           ),
-          TextButton(
-            onPressed: onRefresh,
-            child: Text(LanguageUtils.getString("reload")),
-          )
         ],
       ),
     );

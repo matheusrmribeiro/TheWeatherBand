@@ -1,20 +1,14 @@
-import 'package:intl/intl.dart';
-import 'package:weather_band/app/core/base/enum/view_model_state_enum.dart';
-import 'package:weather_band/app/core/constants.dart';
-import 'package:weather_band/app/core/enums.dart';
-import 'package:weather_band/app/core/theme/app_colors.dart';
-import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
-import 'package:weather_band/app/feature/home/presenter/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:weather_band/app/feature/home/presenter/weather_day_page.dart';
-import 'package:weather_band/app/feature/home/presenter/widgets/custom_empty_widget.dart';
-import 'package:weather_band/app/feature/home/presenter/widgets/custom_loading_widget.dart';
-import 'package:weather_band/app/feature/home/presenter/widgets/forecast_selector_widget.dart';
-import 'package:weather_band/app/feature/home/presenter/widgets/header_widget.dart';
+import 'package:weather_band/app/core/base/enum/view_model_state.dart';
+import 'package:weather_band/app/core/constants.dart';
+import 'package:weather_band/app/core/languages/language_utils.dart';
+import 'package:weather_band/app/core/widgets/custom_empty_widget.dart';
+import 'package:weather_band/app/core/widgets/custom_loading_widget.dart';
+import 'package:weather_band/app/feature/home/presenter/home_view_model.dart';
 import 'package:weather_band/app/feature/home/presenter/widgets/weather_widget.dart';
 
-import 'widgets/custom_error_widget.dart';
+import '../../../core/widgets/custom_error_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,7 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-
   final viewModel = Modular.get<HomeViewModel>();
 
   late TabController _tabController;
@@ -49,22 +42,30 @@ class _HomePageState extends State<HomePage>
         builder: (BuildContext context, Widget? child) {
           Widget widget;
           switch (viewModel.state) {
-            case ViewModelStateEnum.Idle: {
-              if (viewModel.weekDayList.isEmpty) {
-                widget = CustomEmptyWidget(onRefresh: onRefresh);
-              } else {
-                widget = WeatherWidget(
-                  tabController: _tabController,
-                  weekDayList: viewModel.weekDayList,
+            case IdleState():
+              {
+                if (viewModel.weekDayList.isEmpty) {
+                  widget = CustomEmptyWidget(
+                      message: LanguageUtils.getString("empty_data"),
+                      onRefresh: onRefresh);
+                } else {
+                  widget = WeatherWidget(
+                    tabController: _tabController,
+                    weekDayList: viewModel.weekDayList,
+                  );
+                }
+              }
+            case LoadingState(message: var message):
+              {
+                widget = CustomLoadingWidget(message: message ?? "");
+              }
+            case ErrorState(message: var error):
+              {
+                widget = CustomErrorWidget(
+                  message: error ?? "",
+                  onRefresh: onRefresh,
                 );
               }
-            }
-            case ViewModelStateEnum.Loading: {
-              widget = CustomLoadingWidget(message: viewModel.loadingMessage);
-            }
-            case ViewModelStateEnum.Error: {
-              widget = CustomErrorWidget(onRefresh: onRefresh);
-            }
           }
 
           return widget;

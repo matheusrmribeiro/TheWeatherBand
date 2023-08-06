@@ -1,11 +1,11 @@
-import 'package:weather_band/app/core/api/api_client.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_band/app/core/languages/language_view_model.dart';
 import 'package:weather_band/app/core/routes.dart';
 import 'package:weather_band/app/feature/home/presenter/home_page.dart';
 import 'package:weather_band/app/feature/home/presenter/home_view_model.dart';
 import 'package:weather_band/app/feature/splash/splash_page.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'guards/data_injection_guard.dart';
 
 /// ATTENTION
@@ -17,7 +17,6 @@ class AppModule extends Module {
   List<Bind> get binds => [
         AsyncBind((i) => SharedPreferences.getInstance()),
         Bind((i) => LanguageViewModel()),
-        Bind((i) => APIClient()),
         Bind((i) => HomeViewModel()),
       ];
 

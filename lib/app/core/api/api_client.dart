@@ -1,10 +1,8 @@
-import 'dart:convert';
-
-import 'package:weather_band/app/core/api/response_wrapper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_band/app/core/api/response_wrapper.dart';
 
 import '../constants.dart';
 
@@ -116,7 +114,7 @@ class APIClient {
     }
   }
 
-  void _printErrorLog(DioError e) {
+  void _printErrorLog(DioException e) {
     if (kDebugMode) {
       print(
           "StatusCode: ${e.response?.statusCode}, StatusMessage: ${_handleErrorMessage(e.response)}");
