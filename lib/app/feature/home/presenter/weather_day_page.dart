@@ -55,7 +55,7 @@ class WeatherDayPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Text(
-                  "${dayForecast.temperature}º",
+                  "${dayForecast.temperature.toInt()}º",
                   style: TextStyle(
                       color: AppColors.white,
                       fontSize: 80,

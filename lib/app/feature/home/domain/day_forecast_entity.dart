@@ -12,7 +12,7 @@ class DayForecastEntity {
   final WeatherStatus status;
 
   static DayForecastEntity fromMap(Map<String, dynamic> map) => DayForecastEntity(
-        date: DateTime.fromMicrosecondsSinceEpoch(map["dt"], isUtc: true),
+        date: map["date"],
         temperature: map["main"]["temp"],
         status: WeatherStatus.getByString(map["weather"][0]["main"]),
       );

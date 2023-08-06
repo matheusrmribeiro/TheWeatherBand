@@ -40,13 +40,19 @@ class BaseViewModel extends ChangeNotifier {
 
   void notifyChanges() => notifyListeners();
 
-  void loadingStatus(bool isLoading, {String? message}) {
+  void setLoadingStatus(bool isLoading, {String? message}) {
     this.isLoading = isLoading;
     if (!isLoading || message == null)
       loadingMessage = "";
     else
       loadingMessage = message;
     notifyListeners();
+  }
+
+  Future<void> blockLoading({required Function block, String? message}) async {
+    setLoadingStatus(true, message: message);
+    await block();
+    setLoadingStatus(false);
   }
 
 }

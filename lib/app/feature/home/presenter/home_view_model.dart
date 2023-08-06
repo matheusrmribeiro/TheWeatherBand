@@ -30,31 +30,33 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> fetchData() async {
-    final location = GeoPointRequest(
-      lat: -22.275406919110882,
-      lon: -48.52181823008409,
-    );
+  void fetchData() {
+    blockLoading(
+        message: LanguageUtils.getString("loading"),
+        block: () async {
+          final location = GeoPointRequest(
+            lat: -22.275406919110882,
+            lon: -48.52181823008409,
+          );
 
-    final responses = await Future.wait(<Future>[
-      repository.getWeather(location),
-      repository.getForecast(location)
-    ], eagerError: true, cleanUp: (value) {
-      hasError = true;
-    });
+          final responses = await Future.wait(<Future>[
+            repository.getWeather(location),
+            repository.getForecast(location)
+          ], eagerError: true, cleanUp: (value) {
+            hasError = true;
+          });
 
-    for (final response in responses) {
-      if (response is SuccessWrapper) {
-        if (response.data is List)
-          weekDayList.addAll(response.data);
-        else
-          weekDayList.add(response.data);
-      } else
-        hasError = true;
-    }
+          for (final response in responses) {
+            if (response is SuccessWrapper) {
+              if (response.data is List)
+                weekDayList.addAll(response.data);
+              else
+                weekDayList.add(response.data);
+            } else
+              hasError = true;
+          }
 
-    weekDayList.sort((a, b) => a.date.compareTo(b.date));
-    notifyListeners();
+          weekDayList.sort((a, b) => a.date.compareTo(b.date));
+        });
   }
-
 }

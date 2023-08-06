@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather_band/app/feature/home/presenter/weather_day_page.dart';
 import 'package:weather_band/app/feature/home/presenter/widgets/custom_empty_widget.dart';
+import 'package:weather_band/app/feature/home/presenter/widgets/custom_loading_widget.dart';
 import 'package:weather_band/app/feature/home/presenter/widgets/forecast_selector_widget.dart';
 import 'package:weather_band/app/feature/home/presenter/widgets/header_widget.dart';
 import 'package:weather_band/app/feature/home/presenter/widgets/weather_widget.dart';
@@ -40,6 +41,8 @@ class _HomePageState extends State<HomePage>
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (BuildContext context, Widget? child) {
+          if (viewModel.isLoading)
+            return CustomLoadingWidget(message: viewModel.loadingMessage);
           if (viewModel.hasError) {
             return CustomErrorWidget();
           }

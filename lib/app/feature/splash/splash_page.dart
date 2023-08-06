@@ -44,13 +44,6 @@ class _SplashPageState extends State<SplashPage> {
                 color: AppColors.white,
               ),
             ),
-            CustomDividerWidget(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: LinearProgressIndicator(color: AppColors.primaryColor),
-            )
           ],
         ),
       ),
