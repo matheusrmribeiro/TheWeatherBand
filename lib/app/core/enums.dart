@@ -22,9 +22,9 @@ enum WeatherStatus {
   Mist;
 
   static WeatherStatus getByString(String value) {
-    switch (value) {
+    switch (value.toLowerCase()) {
       case "clear sky" || "few clouds": return Sunny;
-      case "scattered clouds": return PartiallyCloudy;
+      case "scattered clouds" || "clouds": return PartiallyCloudy;
       case "broken clouds": return Cloudy;
       case "rain" || "shower rain": return Rainy;
       case "thunderstorm": return Stormy;

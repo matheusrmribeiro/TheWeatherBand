@@ -11,11 +11,14 @@ class DayForecastEntity {
   final double temperature;
   final WeatherStatus status;
 
-  static DayForecastEntity fromMap(Map<String, dynamic> map) => DayForecastEntity(
-        date: map["date"],
-        temperature: map["main"]["temp"],
-        status: WeatherStatus.getByString(map["weather"][0]["main"]),
-      );
+  static DayForecastEntity fromMap(Map<String, dynamic> map) {
+    final temp = map["main"]["temp"];
+    return DayForecastEntity(
+      date: map["date"],
+      temperature: (temp is int) ? temp.toDouble() : temp,
+      status: WeatherStatus.getByString(map["weather"][0]["main"]),
+    );
+  }
 
   static List<DayForecastEntity> fromMapList(List<Map<String, dynamic>> map) =>
       map.map((e) => fromMap(e)).toList();
