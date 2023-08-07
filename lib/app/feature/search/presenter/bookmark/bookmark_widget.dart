@@ -7,6 +7,7 @@ import 'package:weather_band/app/core/widgets/custom_empty_widget.dart';
 import 'package:weather_band/app/core/widgets/custom_loading_widget.dart';
 import 'package:weather_band/app/feature/search/domain/entities/city_entity.dart';
 import 'package:weather_band/app/feature/search/presenter/bookmark/bookmark_view_model.dart';
+import 'package:weather_band/app/feature/search/presenter/widgets/city_list_widget.dart';
 
 import '../../../../core/widgets/custom_error_widget.dart';
 
@@ -52,25 +53,17 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget> {
                             LanguageUtils.getString("search_bookmark_empty"),
                       );
                     } else {
-                      widget = ListView.builder(
-                          itemCount: viewModel.bookmarks.length,
-                          itemBuilder: (_, int index) {
-                            final item = viewModel.bookmarks[index];
-                            return ListTile(
-                              title: Text(item.name),
-                              subtitle:
-                                  Text("${item.state ?? ""} - ${item.country}"),
-                              onTap: () {
-                                this.widget.onItemSelected(item);
-                              },
-                              trailing: IconButton(
-                                onPressed: () {
-                                  viewModel.removeBookmark(item);
-                                },
-                                icon: Icon(Icons.delete, color: AppColors.white),
-                              ),
-                            );
-                          });
+                      widget = CityListWidget(
+                        items: viewModel.bookmarks,
+                        onItemSelected: this.widget.onItemSelected,
+                        onActionCallback: (item) {
+                          viewModel.removeBookmark(item);
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: AppColors.greyTransparent,
+                        ),
+                      );
                     }
                   }
                 case LoadingState(message: var message):

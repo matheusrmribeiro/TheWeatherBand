@@ -20,6 +20,16 @@ staff.<br>
 Its layout was based on dribble
 project [Weather app](https://dribbble.com/shots/3011558-Weather-App).
 
+### Structure
+
+The project structure was based on:
+
+* MVVM
+* Clean Architecture 
+
+> The folder structure is based on a modular product, but this project it's a small prototype so 
+> there aren't to much things to show.
+
 ### Packages
 
 > The main packages used

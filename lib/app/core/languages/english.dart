@@ -12,7 +12,7 @@ Map<String, dynamic> english = {
     "reload": "Refresh",
     "search": "Search",
     "search_hint": "Jaú, São Paulo, Brasil",
-    "search_empty": "Oops, nothing found.",
+    "search_empty": "Oops, nothing found... \n Search something else.",
     "search_tab_bookmark": "Bookmarked",
     "search_tab_search": "Search",
     "search_bookmark_fetching": "Restoring bookmarked cities.",

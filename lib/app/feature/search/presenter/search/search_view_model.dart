@@ -12,24 +12,28 @@ class SearchViewModel extends BaseViewModel {
   List<CityEntity> searchResults = [];
 
   void fetchFromServer(String search) {
-    blockLoading(
-      message: LanguageUtils.getString("loading_geolocation"),
-      block: () async {
-        final response = await repository.search(search);
+    if (search.isEmpty) {
+      searchResults = [];
+      notifyListeners();
+    } else {
+      blockLoading(
+        message: LanguageUtils.getString("loading_geolocation"),
+        block: () async {
+          final response = await repository.search(search);
 
-        if (response is SuccessWrapper) {
-          searchResults = response.data;
-          setState(IdleState());
-        } else
-          setState(
-            ErrorState(message: LanguageUtils.getString("error_geolocation")),
-          );
-      },
-    );
+          if (response is SuccessWrapper) {
+            searchResults = response.data;
+            setState(IdleState());
+          } else
+            setState(
+              ErrorState(message: LanguageUtils.getString("error_geolocation")),
+            );
+        },
+      );
+    }
   }
 
   void addBookmark(CityEntity city) {
     repository.addBookmark(city);
   }
-
 }

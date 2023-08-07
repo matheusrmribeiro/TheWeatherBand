@@ -44,11 +44,14 @@ class WeatherDayPage extends StatelessWidget {
               CustomDividerWidget(
                 height: 50,
               ),
-              SvgPicture.asset(dayForecast.status.getWeatherIcon(),
-                  height: 100,
-                  width: 100,
-                  alignment: Alignment.center,
-                  semanticsLabel: dayForecast.status.toText),
+              Tooltip(
+                message: dayForecast.status.toText,
+                child: SvgPicture.asset(dayForecast.status.getWeatherIcon(),
+                    height: 100,
+                    width: 100,
+                    alignment: Alignment.center,
+                    semanticsLabel: dayForecast.status.toText),
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Text(

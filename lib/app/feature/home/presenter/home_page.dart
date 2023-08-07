@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage>
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (BuildContext context, Widget? child) {
+          _tabController.index = 0;
           Widget widget;
           switch (viewModel.state) {
             case IdleState():
@@ -84,13 +85,19 @@ class _HomePageState extends State<HomePage>
 
           return Stack(
             children: [
-              widget,
+              Positioned(
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: widget,
+              ),
               Align(
                 alignment: Alignment.topCenter,
                 child: SafeArea(
                   child: HeaderWidget(
                     statusColor: backgroundColor,
-                    cityName: viewModel.selectedCity?.name ?? "Cities",
+                    city: viewModel.selectedCity,
                   ),
                 ),
               ),

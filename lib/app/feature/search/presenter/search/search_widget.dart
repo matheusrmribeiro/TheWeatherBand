@@ -8,6 +8,7 @@ import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
 import 'package:weather_band/app/core/widgets/custom_empty_widget.dart';
 import 'package:weather_band/app/core/widgets/custom_loading_widget.dart';
 import 'package:weather_band/app/feature/search/domain/entities/city_entity.dart';
+import 'package:weather_band/app/feature/search/presenter/widgets/city_list_widget.dart';
 
 import '../../../../core/widgets/custom_error_widget.dart';
 import 'search_view_model.dart';
@@ -77,40 +78,38 @@ class _SearchWidgetState extends State<SearchWidget> {
                 case IdleState():
                   {
                     if (viewModel.searchResults.isEmpty) {
-                      widget = CustomEmptyWidget(
+                      widget = SingleChildScrollView(
+                        child: CustomEmptyWidget(
                           message: LanguageUtils.getString("search_empty"),
-                          onRefresh: onSearch);
+                        ),
+                      );
                     } else {
-                      widget = ListView.builder(
-                          itemCount: viewModel.searchResults.length,
-                          itemBuilder: (_, int index) {
-                            final item = viewModel.searchResults[index];
-                            return ListTile(
-                              title: Text(item.name),
-                              subtitle:
-                                  Text("${item.state ?? ""} - ${item.country}"),
-                              onTap: () {
-                                this.widget.onItemSelected(item);
-                              },
-                              trailing: IconButton(
-                                onPressed: () {
-                                  viewModel.addBookmark(item);
-                                },
-                                icon: Icon(Icons.bookmarks, color: AppColors.white,),
-                              ),
-                            );
-                          });
+                      widget = CityListWidget(
+                        items: viewModel.searchResults,
+                        onItemSelected: this.widget.onItemSelected,
+                        onActionCallback: (item) {
+                          viewModel.addBookmark(item);
+                        },
+                        icon: Icon(
+                          Icons.bookmarks,
+                          color: AppColors.greyTransparent,
+                        ),
+                      );
                     }
                   }
                 case LoadingState(message: var message):
                   {
-                    widget = CustomLoadingWidget(message: message ?? "");
+                    widget = SingleChildScrollView(
+                      child: CustomLoadingWidget(message: message ?? ""),
+                    );
                   }
                 case ErrorState(message: var error):
                   {
-                    widget = CustomErrorWidget(
-                      message: error ?? "",
-                      onRefresh: onSearch,
+                    widget = SingleChildScrollView(
+                      child: CustomErrorWidget(
+                        message: error ?? "",
+                        onRefresh: onSearch,
+                      ),
                     );
                   }
               }

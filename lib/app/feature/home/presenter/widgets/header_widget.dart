@@ -2,19 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:weather_band/app/feature/home/presenter/home_view_model.dart';
+import 'package:weather_band/app/feature/search/domain/entities/city_entity.dart';
 import 'package:weather_band/app/feature/search/presenter/search_page.dart';
 
 class HeaderWidget extends StatelessWidget {
   HeaderWidget({
     Key? key,
-    required this.cityName,
+    this.city,
     required this.statusColor,
   }) : super(key: key);
 
-  final String cityName;
+  final CityEntity? city;
   final Color statusColor;
 
   final viewModel = Modular.get<HomeViewModel>();
+
+  String cityName() {
+    String cityName = "Cities";
+    if (viewModel.selectedCity != null) {
+      cityName =
+          "${viewModel.selectedCity!.name}, ${viewModel.selectedCity!.country} ";
+    }
+    return cityName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +62,7 @@ class HeaderWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      cityName,
+                      cityName(),
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.w700,
