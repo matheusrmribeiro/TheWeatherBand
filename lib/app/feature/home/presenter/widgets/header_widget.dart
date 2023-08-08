@@ -26,11 +26,12 @@ class HeaderWidget extends StatelessWidget {
     return cityName;
   }
 
+  Color getBackgroundColor(Color color) {
+    return HSLColor.fromColor(statusColor).withSaturation(0.8).toColor();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final backgroundColor =
-        HSLColor.fromColor(statusColor).withSaturation(0.8).toColor();
-
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -52,7 +53,7 @@ class HeaderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
-              color: backgroundColor,
+              color: getBackgroundColor(statusColor),
               elevation: 5,
               child: Container(
                 height: 60,

@@ -16,18 +16,24 @@ class WeatherDayPage extends StatelessWidget {
     return name;
   }
 
+  Color getBackgroundStartColor() {
+    return dayForecast.status.getWeatherColor();
+  }
+
+  Color getBackgroundEndColor() {
+    return HSLColor.fromColor(dayForecast.status.getWeatherColor())
+        .withLightness(0.6)
+        .toColor();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final backgroundColorStart = dayForecast.status.getWeatherColor();
-    final backgroundColorEnd =
-        HSLColor.fromColor(backgroundColorStart).withLightness(0.6).toColor();
-
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            backgroundColorStart,
-            backgroundColorEnd,
+            getBackgroundStartColor(),
+            getBackgroundEndColor(),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

@@ -37,15 +37,17 @@ class _HomePageState extends State<HomePage>
     viewModel.fetchData();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Color getBackgroundColor() {
     final weatherStatus = (viewModel.weekDayList.isEmpty)
         ? WeatherStatus.Sunny
         : viewModel.weekDayList[_tabController.index].status;
-    final backgroundColor = HSLColor.fromColor(weatherStatus.getWeatherColor())
+    return HSLColor.fromColor(weatherStatus.getWeatherColor())
         .withSaturation(0.8)
         .toColor();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: ListenableBuilder(
         listenable: viewModel,
@@ -96,7 +98,7 @@ class _HomePageState extends State<HomePage>
                 alignment: Alignment.topCenter,
                 child: SafeArea(
                   child: HeaderWidget(
-                    statusColor: backgroundColor,
+                    statusColor: getBackgroundColor(),
                     city: viewModel.selectedCity,
                   ),
                 ),

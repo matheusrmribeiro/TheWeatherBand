@@ -15,6 +15,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   SharedPreferences prefs = Modular.get<SharedPreferences>();
 
+  /// Simulates fetching data before initialize the main application
   @override
   void initState() {
     super.initState();

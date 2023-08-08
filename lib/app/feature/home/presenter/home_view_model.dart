@@ -21,12 +21,10 @@ class HomeViewModel extends BaseViewModel {
   late WeekDay currentWeekDay;
   late WeekDay selectedWeekDay;
   List<DayForecastEntity> weekDayList = [];
-  int position = 0;
   CityEntity? selectedCity;
 
   void setWeekDay(WeekDay value, int position) {
     selectedWeekDay = value;
-    this.position = position;
     notifyListeners();
   }
 

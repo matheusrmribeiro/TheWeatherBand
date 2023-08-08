@@ -39,6 +39,7 @@ class WeatherRepositoryImpl extends WeatherRepositoryInterface {
         dataList.asMap().forEach((index, element) {
           element["date"] = DateTime.now().add(Duration(days: index + 1));
         });
+
         final entity = DayForecastEntity.fromMapList(dataList);
         finalResponse = SuccessWrapper(data: entity);
     }

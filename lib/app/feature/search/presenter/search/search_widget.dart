@@ -6,11 +6,11 @@ import 'package:weather_band/app/core/languages/language_utils.dart';
 import 'package:weather_band/app/core/theme/app_colors.dart';
 import 'package:weather_band/app/core/widgets/custom_divider_widget.dart';
 import 'package:weather_band/app/core/widgets/custom_empty_widget.dart';
+import 'package:weather_band/app/core/widgets/custom_error_widget.dart';
 import 'package:weather_band/app/core/widgets/custom_loading_widget.dart';
 import 'package:weather_band/app/feature/search/domain/entities/city_entity.dart';
 import 'package:weather_band/app/feature/search/presenter/widgets/city_list_widget.dart';
 
-import '../../../../core/widgets/custom_error_widget.dart';
 import 'search_view_model.dart';
 
 class SearchWidget extends StatefulWidget {
