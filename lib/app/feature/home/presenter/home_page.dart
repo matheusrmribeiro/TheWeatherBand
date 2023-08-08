@@ -38,10 +38,7 @@ class _HomePageState extends State<HomePage>
   }
 
   Color getBackgroundColor() {
-    final weatherStatus = (viewModel.weekDayList.isEmpty)
-        ? WeatherStatus.Sunny
-        : viewModel.weekDayList[_tabController.index].status;
-    return HSLColor.fromColor(weatherStatus.getWeatherColor())
+    return HSLColor.fromColor(AppColors.sunnyColor)
         .withSaturation(0.8)
         .toColor();
   }
