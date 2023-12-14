@@ -14,8 +14,6 @@ The project structure is based on:
 
 ### Packages
 
-> The main packages used
-
 **flutter_modular**: Deal with navigation and data injection.<br>
 **dio**: To HTTP requests.<br>
 **connectivity_plus**: Check internet connectivity.<br>
@@ -31,9 +29,9 @@ The project structure is based on:
 > It runs on Android 23+.
 
 1. Open the project on your favorite IDE (Android Studio, VSCode, etc).
-2. Open the Terminal and navigates to the project root folder and run "flutter pub get".
-3. Configure and run an Android Emulator Device (With android 23+).
-4. Run the project selecting you emulator.
+2. Open the Terminal, navigate to the project root folder, and run "flutter pub get".
+3. Configure and run an Android Emulator Device (With Android 23+).
+4. Run the project by selecting your emulator.
 
  # Preview
 <img src="preview/preview_weather_band.gif" height="250"/>
