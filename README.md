@@ -1,13 +1,9 @@
 # TheWeatherBand
 
-> The assessment: https://gist.github.com/cloudwalk-tests/4689b2c15fd7d9d8d8fa807772d54516
-
 ## About the project
 
-The Weather Band is an application to track weather in a fashion manner for a rock'n'roll band
-staff.<br>
-Its layout was based on dribble
-project [Weather app](https://dribbble.com/shots/3011558-Weather-App).
+The Weather Band is an application to track the weather fashionably for a rock'n'roll band staff.<br>
+Its layout was based on the dribble project [Weather app](https://dribbble.com/shots/3011558-Weather-App).
 
 ### Structure
 
