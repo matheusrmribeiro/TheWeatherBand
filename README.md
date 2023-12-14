@@ -38,3 +38,6 @@ The project structure is based on:
 2. Open the Terminal and navigates to the project root folder and run "flutter pub get".
 3. Configure and run an Android Emulator Device (With android 23+).
 4. Run the project selecting you emulator.
+
+ # Preview
+<img src="preview/preview_weather_band.gif" height="250"/>
