@@ -38,12 +38,3 @@ The project structure is based on:
 2. Open the Terminal and navigates to the project root folder and run "flutter pub get".
 3. Configure and run an Android Emulator Device (With android 23+).
 4. Run the project selecting you emulator.
-
-
-## Additional information
-
-* I didn't write any tests, because I don't have experience with Flutter widget testing.
-* The test time was good, but I couldn't work to much on the project so I implemented the online API
-  communication
-  without any offline data, I have only handled if the device is connected or not to the internet to
-  show an error message.
