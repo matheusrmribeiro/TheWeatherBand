@@ -1,13 +1,9 @@
 # TheWeatherBand
 
-> The assessment: https://gist.github.com/cloudwalk-tests/4689b2c15fd7d9d8d8fa807772d54516
-
 ## About the project
 
-The Weather Band is an application to track weather in a fashion manner for a rock'n'roll band
-staff.<br>
-Its layout was based on dribble
-project [Weather app](https://dribbble.com/shots/3011558-Weather-App).
+The Weather Band is an application to track the weather fashionably for a rock'n'roll band staff.<br>
+Its layout was based on the dribble project [Weather app](https://dribbble.com/shots/3011558-Weather-App).
 
 ### Structure
 
@@ -17,8 +13,6 @@ The project structure is based on:
 * Clean Architecture
 
 ### Packages
-
-> The main packages used
 
 **flutter_modular**: Deal with navigation and data injection.<br>
 **dio**: To HTTP requests.<br>
@@ -35,6 +29,9 @@ The project structure is based on:
 > It runs on Android 23+.
 
 1. Open the project on your favorite IDE (Android Studio, VSCode, etc).
-2. Open the Terminal and navigates to the project root folder and run "flutter pub get".
-3. Configure and run an Android Emulator Device (With android 23+).
-4. Run the project selecting you emulator.
+2. Open the Terminal, navigate to the project root folder, and run "flutter pub get".
+3. Configure and run an Android Emulator Device (With Android 23+).
+4. Run the project by selecting your emulator.
+
+ # Preview
+<img src="preview/preview_weather_band.gif" height="250"/>
